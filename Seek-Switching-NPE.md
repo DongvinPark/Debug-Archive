@@ -40,7 +40,7 @@
 - 이 때, N보다 큰 K의 값을 갖는 샘플에서 스위칭이 일어나면, 샘플 큐 내부에서 사용하는 relative idx인 M보다 훨씬 큰 값인 K가 샘플 큐 내부로 전달 된다.
 - M과 K가 서로 불일치 함에 따라 Up Stream 방향의 샘플들을 버리는 횟수가 너무 크거나(정방향 Seek) 너무 적게(역방향 Seek) 설정된다.
 - 결과적으로 정방향으로 Seek 했을 경우, 샘플 큐 내부의 샘플들이 전부 버려진다.
-- 샘플을 소비해야 하는 코덱 스레드 입장에서는 원하는 샘플을 얻지 못했기 때문에 Null Pointer Exception을 발생시키면서 앱이 작동을 중지한다.
+- 샘플을 소비해야 하는 코덱 스레드 입장에서는 원하는 샘플을 얻지 못했기 때문에 Null Pointer Exception을 발생시키면서 앱이 작동을 중지한다.<br/>
 <img width="892" alt="시크 후 스위칭일 때" src="https://github.com/DongvinPark/Debug-Archive/assets/99060708/0a6d54a4-97ff-499f-b026-f443586430f9"><br/>
 
 
