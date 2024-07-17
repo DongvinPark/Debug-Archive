@@ -18,11 +18,11 @@
 
 <br><br/>
 ## 개발한 기능
-- ***VR 영상의 재생이 일시 정지 된 상태에서 시청자가 고개를 돌려서 Switching을 했을 때, 마치 360도 공간 전체가 멈춘 것처럼 보이게 만드는 것.***
+- ***VR 영상의 재생이 일시 정지 된 상태에서 시청자가 고개를 돌려서 Pause Switching을 했을 때, 마치 360도 공간 전체가 멈춘 것처럼 보이게 만드는 것.***
     - [시연 영상 링크](https://subdued-lentil-b20.notion.site/Pause-Switching-Test-e5dff05eba9344b9ba4780313696b2c7)
 
 <br><br/>
-## Media Player Architecture
+## ExoPlayer RTSP Streaming Part Architecture
 - test contents
 
 <br><br/>
