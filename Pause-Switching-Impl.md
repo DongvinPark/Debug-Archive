@@ -33,19 +33,21 @@
 - **Surface** : 코덱을 거쳐서 생성된 프레임 데이터를 저장한다. 그래픽 버퍼이며 최종 디스플레이에 사용된다.
 
 <br><br/>
-## Step 1 : Switching에 걸리는 시간을 단축시키기
+## Step 1 : Pause Switching에 걸리는 시간을 단축시키기
 <img width="1029" alt="스크린샷 2024-07-18 오후 1 31 32" src="https://github.com/user-attachments/assets/895eeb08-f7e8-43a9-8d0e-d092a2066e19"><br>
 <img width="1048" alt="스크린샷 2024-07-18 오후 2 55 09" src="https://github.com/user-attachments/assets/81cedc67-f0c1-4394-b4a0-f9b937601889"><br>
 <img width="1046" alt="스크린샷 2024-07-18 오후 3 03 30" src="https://github.com/user-attachments/assets/646346a1-7344-4d78-a863-1280afecf840"><br>
-- **Pause Switching에서 추가적으로 필요하는 Seek Play를 Source 서버와의 트랜잭션 없이 시작하게 만듦**
+- **Pause Switching에서 추가적으로 필요하는 Seek Play를 Source 서버와의 트랜잭션 없이 시작하게 만듦.**
+- 두 번의 네트워크 트랜잭션(Switching, Seep Play)이 한 번으로 줄어들어서 pause switching의 전체 수행시간이 단축됨.
 - seek play가 시작됨으로써, pause 상태가 강제로 해제되고 renderer가 작동하기 시작함.
 - pause switching 완료 후, seek play를 다시 중지시킴.
 
 <br><br/>
 ## Step 2 : pause switching 후 다시 재생했을 때 화면이 깨지는 현상 바로잡기
 <img width="1027" alt="스크린샷 2024-07-18 오후 1 34 11" src="https://github.com/user-attachments/assets/e34cff83-7c0e-472b-93ef-75d48331b3cc"><br>
-- **test contents bold**
-- test contents
+<img width="950" alt="스크린샷 2024-07-18 오후 3 37 08" src="https://github.com/user-attachments/assets/3f954759-7f25-44a6-89c5-57d6d36dc4fb"><br>
+- **Pause Switching 때 전송하는 샘플의 개수를 제한시킴.**
+- pause switching 때 전송하는 샘플의 개수를 제한하지 않고 서버에서 전송을 계속하게 만들면, pause switching이 종료된 후 유저가 playback 시켰을 때 전송되는 샘플들과 뒤섞이면서 화면이 깨지는 현상이 발생함.
 
 <br><br/>
 ## Step 3 : pause switching 후 재생시킨 다음 일반 switching 했을 때 화면이 멈추는 것 바로잡기
