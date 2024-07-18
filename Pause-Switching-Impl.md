@@ -23,6 +23,7 @@
 
 <br><br/>
 ## ExoPlayer RTSP Streaming Part Architecture
+<img width="1019" alt="스크린샷 2024-07-18 오전 9 19 32" src="https://github.com/user-attachments/assets/3df5ba83-d5ed-4d9f-bc4e-a07bd2be3517"><br>
 - test contents
 
 <br><br/>
