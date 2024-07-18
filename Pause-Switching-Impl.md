@@ -12,7 +12,7 @@
 <br><br/>
 - **개발 & 디기버깅 소요 시간** : 2024.6.15 ~ 7.17 (33일)
 <br><br/>
-- **일반 Switching의 뜻** : VR 영상을 재생하는 도중에 시점을 전환하는 것. 예를 들면, 정면 영상을 보다가 뒷면 영상을 보는 것.
+- **일반 Switching의 뜻** : VR 영상을 재생하는 도중에 시점을 전환하는 것. 예를 들면, 정면 영상을 보다가 왼쪽 또는 오른쪽 영상을 보는 것.
 <br><br/>
 - **Pause Switching의 뜻** : VR 영상을 일시정지 시킨 상태에서 시점을 전환하는 것. 이 상태에서 고개를 좌우로 돌려보면 눈에 들어오는 360도 공간 전체가 일시정지 된 것처럼 보임.
 
@@ -35,6 +35,8 @@
 <br><br/>
 ## Step 1 : Pause Switching에 걸리는 시간을 단축시키기
 <img width="1029" alt="스크린샷 2024-07-18 오후 1 31 32" src="https://github.com/user-attachments/assets/895eeb08-f7e8-43a9-8d0e-d092a2066e19"><br>
+- 일반 switching과 pause switching의 비교
+- pause switching 때 서버에게 Seek Play 요청을 하면서 네트워크 트랜잭션 시간이 추가로 소요됨.
 <img width="1048" alt="스크린샷 2024-07-18 오후 2 55 09" src="https://github.com/user-attachments/assets/81cedc67-f0c1-4394-b4a0-f9b937601889"><br>
 <img width="1046" alt="스크린샷 2024-07-18 오후 3 03 30" src="https://github.com/user-attachments/assets/646346a1-7344-4d78-a863-1280afecf840"><br>
 - **Pause Switching에서 추가적으로 필요하는 Seek Play를 Source 서버와의 트랜잭션 없이 시작하게 만듦.**
