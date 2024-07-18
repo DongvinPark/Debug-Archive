@@ -52,8 +52,9 @@
 <br><br/>
 ## Step 3 : pause switching 후 재생시킨 다음 일반 switching 했을 때 화면이 멈추는 것 바로잡기
 <img width="1019" alt="스크린샷 2024-07-18 오후 1 35 28" src="https://github.com/user-attachments/assets/4cf8c228-8160-4182-8a6b-5620a0b84631"><br>
-- **test contents bold**
-- test contents
+- **코덱에서 마지막으로 디코드한 샘플의 인덱스를 기준으로, 바로 다음 인덱스의 샘플부터 Source 서버에서 전송하게 만듦.**
+- 예들 들어서, pause switching 후 다시 playback해서 재생 중인 상태에서 코덱에서 11번 샘플을 디코드 완료했다고 가정.
+- 바로 이 타이밍에 일반 switching이 시작되었다면, Source 서버로 하여금 12번 샘플부터 전송하게 만듦.
 
 <br><br/>
 ## Step 4 : pause switching을 연이어 실행할 때마다 화면이 조금씩 재생되는 현상 막기
