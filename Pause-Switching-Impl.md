@@ -59,5 +59,6 @@
 <br><br/>
 ## Step 4 : pause switching을 연이어 실행할 때마다 화면이 조금씩 재생되는 현상 막기
 <img width="1019" alt="스크린샷 2024-07-18 오후 1 35 28" src="https://github.com/user-attachments/assets/4cf8c228-8160-4182-8a6b-5620a0b84631"><br>
-- **test contents bold**
-- test contents
+<img width="1001" alt="스크린샷 2024-07-18 오후 4 22 22" src="https://github.com/user-attachments/assets/1f074ebf-4464-4e34-8618-57c502d5681b"><br>
+- **최초의 pause switcing 때 Source 서버에서 전송한 첫 샘플의 인덱스를 다음 pause switching 때도 재활용함.**
+- 이러한 재활용 조치가 없을 경우, pause switching이 연속적으로 실행되는 상황에서 8 프레임씩 영상이 정방향 재생되는 현상이 발생함. 이 상태로 pause switching만 계속 반복하면 영상이 결국 끝까지 재생 됨.
