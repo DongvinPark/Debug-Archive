@@ -23,8 +23,14 @@
 
 <br><br/>
 ## ExoPlayer RTSP Streaming Part Architecture
-<img width="1019" alt="스크린샷 2024-07-18 오전 9 19 32" src="https://github.com/user-attachments/assets/3df5ba83-d5ed-4d9f-bc4e-a07bd2be3517"><br>
-- test contents
+<img width="1013" alt="스크린샷 2024-07-18 오전 9 51 24" src="https://github.com/user-attachments/assets/2bb1c7d2-0d4a-4eeb-bca9-0fd81f774bf1"><br>
+- **Source** : RTSP 스트림을 제공하는 미디어 서버를 뜻한다.
+- **Load Control** : RTSP 프로토콜로 미디어 서버와 통신하면서 스트림의 재생, 정지, 일시정지, seek, switching 동작을 수행한다. 필요에 따라서 Loader의 작동을 중지시키거나, Sample Queue를 reset 시킨 후 전부 비운다.
+- **Loader** : RTSP 서버로부터 받은 RTP 패킷을 샘플 단위로 모아서 sample queue에 커밋한다.
+- **Sample Queue & Track Selector** : 샘플들을 timestamp 순서에 맞게 저장하고 있다가 Renderer에게 넘겨 준다.
+- **Renderer** : sample queue에서 읽어들인 샘플 데이터를 코덱에게 넘겨준다.
+- **Codec** : renderer에게 넘겨 받은 샘플을 디코드하여 frame으로 만든 후, renderer에게 디코드 완료를 알린다.
+- **Surface** : 코덱을 거쳐서 생성된 프레임 데이터를 저장한다. 그래픽 버퍼이며 최종 디스플레이에 사용된다.
 
 <br><br/>
 ## Step 1 : 스위칭에 걸리는 시간을 단축시키기
