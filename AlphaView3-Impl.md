@@ -20,6 +20,7 @@
     - [AlphaView 2.0 시연 영상 링크](https://subdued-lentil-b20.notion.site/AlphaView-2-0-Test-763fc8db7bc94808afc0b21f36371815)
     - 비디오 렌더러가 1 개이기 때문에, 사용자가 옆을 볼 경우 'Switching' 과정을 통해서 옆면을 기록한 비디오 파일의 샘플들을 RTSP 서버에게 요청해야 함.
     - 네트워크 속도가 느릴 경우, Switching 시 중간에 검은색 줄이 보이면서 공간이 끊어지는 것처럼 보일 수 있음.
+    - 시연 영상 화면의 측면 쪽을 잘 보면, 사용자의 시점이 왼쪽으로 이동할 때, 순간 화면에 검은색 줄이 잠깐 깜빡였다가 사라지는 것을 볼 수 있음.
     - 스트리밍에 필요한 비디오 파일의 개수가 많다는 단점이 존재함(12개 필요).
 - ***AlphaView 3.0 의 효과***
     - [AlphaView 3.0 시연 영상 링크](https://subdued-lentil-b20.notion.site/AlphaView-3-0-Test-6405d8afc55649deab83b85282dc421d)
