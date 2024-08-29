@@ -44,7 +44,7 @@
 - AVPT는 RTSP 트랜잭션을 통해서 SDP 메시지를 가져오고, 이에 맞춰서 3 종류의 SampleQueue를 만듦.
 - Track Selector는 trackId과 renderer index를 이용해서 적절한 SampleQueue와 renderer를 매핑함.
 - AVPT가 RTSP PLAY 요청을 한 후 RTP 패킷들이 들어오면, channel 값에 따라서 적절한 SampleQueue에 RTP 패킷들이 전달되고 SampleQueue에는 샘플들이 누적됨.
-    - channel 0, 1, 2 는 각각 front 비디오, rear 비디오, audio 샘플 큐에 대응함.
+    - channel 0, 1, 2 는 각각 front 비디오, audio, rear 비디오 샘플 큐에 대응함.
 - ExoPlayer 내의 renderer 들이 샘플들을 SampleQueue로부터 읽어들일 때, Track Selector에 의해서 매핑된 결과에 따른 SampleQueue로부터 샘플들을 읽어들임.
 - 각각의 renderer 들이 읽어들인 샘플은 각 renderer에 연결된 코덱에 전달된 후 디코드 되고 최종적으로 화면 또는 스피커로 출력 됨.
 
