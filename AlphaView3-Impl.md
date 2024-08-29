@@ -13,6 +13,8 @@
 - **한 줄 요약** : 비디오 렌더러가 1 개였던 기존 AlphaView2.0의 RTSP 파트를 비디오 렌더러 2 개(Front & Rear 비디오 1개씩)를 사용하도록 수정
 <br><br/>
 - **Switching의 뜻** : 시청자가VR 영상을 보다가 보다가 고개를 돌려서 왼쪽, 오른쪽, 또는 뒤를 봤을 때 클라이언트 앱에서 이에 대응하여 시선의 방향에 부합하는 새로운 화면을 보여주는 것.
+<br><br/>
+- **AVPT 3.0** : 고화질 VR 영상 플레이어 어플리케이션. 안드로이드 프로젝트이며, 내부에 ExoPlayer를 사용하고 있음.
 
 <br><br/>
 ## AlphaView 3.0의 특징 & 효과
@@ -37,6 +39,18 @@
 - EFS에서 읽어들인 내용을 바탕으로 RTP 데이터를 클라이언트에게 전달함.
 
 <br><br/>
-## AlphaView 3.0 내부 구조 & 초기화 과정
-- ***테스트 컨텐츠***
-- 테스트 컨텐츠
+## AVPT 3.0 초기화 & 재생 과정
+<img width="1048" alt="스크린샷 2024-08-29 오후 4 09 36" src="https://github.com/user-attachments/assets/2fbd0192-2aae-45b1-97a9-715b4595dcfb"><br>
+- AVPT는 RTSP 트랜잭션을 통해서 SDP 메시지를 가져오고, 이에 맞춰서 3 종류의 SampleQueue를 만듦.
+- Track Selector는 trackId과 renderer index를 이용해서 적절한 SampleQueue와 renderer를 매핑함.
+- AVPT가 RTSP PLAY 요청을 한 후 RTP 패킷들이 들어오면, channel 값에 따라서 적절한 SampleQueue에 RTP 패킷들이 전달되고 SampleQueue에는 샘플들이 누적됨.
+    - channel 0, 1, 2 는 각각 front 비디오, rear 비디오, audio 샘플 큐에 대응함.
+- ExoPlayer 내의 renderer 들이 샘플들을 SampleQueue로부터 읽어들일 때, Track Selector에 의해서 매핑된 결과에 따른 SampleQueue로부터 샘플들을 읽어들임.
+- 각각의 renderer 들이 읽어들인 샘플은 각 renderer에 연결된 코덱에 전달된 후 디코드 되고 최종적으로 화면 또는 스피커로 출력 됨.
+
+<br><br/>
+## 개선해야 하는 점.
+- ***BitRate 낮추기***
+    - 시청자가 항상 뒤를 보고 있거나, 언제가 고개를 좌,우,앞,뒤로 정신없이 움직일 가능성은 낮음.
+    - 이러한 상황에서도 현재 AlphaView 3.0에서는 언제나 앞/뒤 비디오 샘플들을 항상 같이 전송함.
+    - 이는 bitrate가 불필요하게 높아지는 원인이 되므로 bitrate를 낮추기 위한 방법이 필요함.
