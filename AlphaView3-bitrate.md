@@ -1,4 +1,4 @@
-# How to Reduce Bitrate Value in 3D VR Streaming
+# How to Reduce Bitrate in 3D VR Streaming
 <br/>
 
 ## 유의사항
