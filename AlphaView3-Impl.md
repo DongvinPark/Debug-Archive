@@ -14,7 +14,7 @@
 <br><br/>
 - **Switching의 뜻** : 시청자가VR 영상을 보다가 보다가 고개를 돌려서 왼쪽, 오른쪽, 또는 뒤를 봤을 때 클라이언트 앱에서 이에 대응하여 시선의 방향에 부합하는 새로운 화면을 보여주는 것.
 <br><br/>
-- **AVPT 3.0** : 고화질 VR 영상 플레이어 어플리케이션. 안드로이드 프로젝트이며, 내부에 ExoPlayer를 사용하고 있음.
+- **AVPT 6.1** : 고화질 VR 영상 플레이어 어플리케이션. 안드로이드 프로젝트이며, 내부에 ExoPlayer를 사용하고 있음.
 
 <br><br/>
 ## AlphaView 3.0의 특징 & 효과
@@ -32,15 +32,15 @@
 
 <br><br/>
 ## AlphaView 3.0 스트리밍용 데이터 생성 & 전달 아키텍처
-<img width="1146" alt="스크린샷 2024-08-29 오전 10 43 59" src="https://github.com/user-attachments/assets/161124fe-1db0-44c0-aa3b-ea66e9d297e0"><br>
+<img width="980" alt="Image" src="https://github.com/user-attachments/assets/e6addc08-b480-4bb6-9d51-d0cb8d0a1fa3" /><br>
 - 원본 mp4 비디오 파일들이 Transcoder를 통해서 스트리밍용 rtp 데이터 파일들로 변환됨. 이때, FFMPEG가 트랜스코딩에 사용 됨.
 - 스트리밍용 파일들을 S3에 업로드 하고, AWS DataSync를 통해서 S3의 파일들이 Network File System의 일종인 EFS(Elastic File System)에 복사 & 동기화 됨.
 - 여러 대의 EC2(또는 Elastic Container Service 내의 컨테이너들)에서 돌아가는 RTSP 스트리밍 서버가 EFS에 접근하여 스트리밍용 파일을 읽어들임.
 - EFS에서 읽어들인 내용을 바탕으로 RTP 데이터를 클라이언트에게 전달함.
 
 <br><br/>
-## AVPT 3.0 초기화 & 재생 과정
-<img width="1048" alt="스크린샷 2024-08-29 오후 4 09 36" src="https://github.com/user-attachments/assets/2fbd0192-2aae-45b1-97a9-715b4595dcfb"><br>
+## AlphaView 3.0 초기화 & 재생 과정
+<img width="1044" alt="Image" src="https://github.com/user-attachments/assets/ec2a6999-d70d-4043-a906-c1daa607f253" /><br>
 - AVPT는 RTSP 트랜잭션을 통해서 SDP 메시지를 가져오고, 이에 맞춰서 3 종류의 SampleQueue를 만듦.
 - Track Selector는 trackId과 renderer index를 이용해서 적절한 SampleQueue와 renderer를 매핑함.
 - AVPT가 RTSP PLAY 요청을 한 후 RTP 패킷들이 들어오면, channel 값에 따라서 적절한 SampleQueue에 RTP 패킷들이 전달되고 SampleQueue에는 샘플들이 누적됨.
