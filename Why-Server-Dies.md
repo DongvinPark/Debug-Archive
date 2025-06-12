@@ -8,18 +8,12 @@
 
 ## 서버에 요청이 몰릴 때, 컴퓨터에서 일어나는 일
 ### 네트워킹과 컴퓨터 H/W
+![Image](https://github.com/user-attachments/assets/e4678d50-96fe-482f-9b9b-94c096d809fb)
 - OSI Layer에서 7 계층에서 호출하는 Socket의 뒤에는 CPU 와 RAM 말고도 Network Interface Card(NIC)라는 하드웨어가 존재하고, 7 계층 내부에 존재하는 user buffer 이외에도 두 종류의 buffer가 더 있습니다.
 - RAM의 kernel 공간에는 socket buffer가 존재하고, NIC에는 NIC buffer가 존재합니다.
-- NIC, DMA, RAM, CPU, Socket, Layer 7 App, nic buffer, socket buffer, user buffer, socket de-multiplexing 을 포함하는 그림1 필요
-<br>
-
-### Data Flow Architecture
-- read()
-  - 그림 1에서 리드 방향 화살표 추가한 그림2
-  - 그림 2에 근거한 설명 추가
-- write()
-  - 그림 2에서 라이트 방향 화살표 추가한 그림3
-  - 그림 3에 근거한 설명 추가
+- socket buffer에는 RX 버퍼와 TX 버퍼가 각각 존재하고,
+- NIC 내부에도 RX 버퍼와 TX 버퍼가 각각 존재합니다.
+- 빨간색 화살표는 socket에 write()를 했을 때 데이터의 흐름이고, 파란색 화살표는 socket에서 read()를 했을 때의 데이터 흐름입니다.
 <br>
 
 ### 동시접속자 수가 급증시 서버에서 발생하는 병목현상의 종류와 원인
