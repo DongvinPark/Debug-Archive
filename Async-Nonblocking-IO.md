@@ -3,7 +3,10 @@
 
 
 ## 2 X 2 Matrix - Sync, Async, Blocking, Non-blocking
-
+|                 | Blocking I/O                                               | Non-blocking I/O                                              |
+|-----------------|-----------------------------------------------------------|---------------------------------------------------------------|
+| **Synchronous I/O** | - 스레드가 I/O 완료 시까지 멈춤<br>- ex: `read()`, `write()` (일반) | - 스레드가 I/O 시도 → 준비 안 됐으면 실패(EAGAIN)<br>- 루프나 poll로 재시도<br>- ex: `read()` + O_NONBLOCK |
+| **Asynchronous I/O** | - 의미상 거의 없음 (async인데 스레드가 멈춘다는 건 모순적)<br>- 실용적 구현 예 없음 | - I/O 요청만 등록하고 스레드는 다른 일 수행<br>- 완료 시 OS가 이벤트/콜백/큐로 알려줌<br>- ex: Linux AIO, io_uring, Windows IOCP |
 ### 설명 대상의 차이
 - {Sync/Async}와 {Blocking/Non-blocking}은 초점을 맞추고 있는 대상이 다릅니다.
 - Sync & Async는 프로그램의 일부 control flow에 초점을 맞춥니다. 즉, 리턴 값 또는 결과물을 기다리느냐 그렇지 않느냐입니다.
@@ -76,15 +79,15 @@
 - connection 별로 state를 유지 및 관리해야 하는 스트리밍 서버의 트래픽이 이러한 양상을 보입니다. RTSP 서버가 대표적입니다.
 - 실제 테스트 결과도 존재한다.(내꺼 보여주기)
 - [만약 1만 명의 http 클라이언트에게 전부 하나씩 스레드를 할당한다면?]()
-  - 과도한 스레드 컨텍스트 스위칭들과 I/O 관련 인터럽트들의 발생으로 인해 서버의 기능이 마비될 것입니다.
+  - 과도한 스레드 컨텍스트 스위칭과 I/O 관련 인터럽트들의 발생으로 인해 서버의 기능이 마비될 것입니다.
 <br><br/>
 
 ### Async - Nonblocking I/O
 - 클라이언트 1 명의 컴퓨팅 리소스 점유 시간이 짧고 랜덤할 때 적합합니다. 결과적으로 연결돼 있는 connection(즉, 소켓)은 많지만, 실제로 컴퓨팅 리소스를 장기간 점유하는 connection은 적은 경우에 적합합니다.
 - 웹 서버, HTTP 서버의 트래픽이 대표적으로 이러한 양상을 보입니다.
 - [만약 1만 명의 고화질 스트리밍 시청자들에게 Async - Nonblocking I/O로 스트리밍 서비스를 제공한다면?]()
-  - Async I/O는 결과적으로 이벤트의 생성, 감지, 처리라는 오버헤드를 가지고 있습니다.
-  - 그렇기 때문에 동시접속 클라이언트가 늘어날수록, 클라이언트마다 데이터 전송 전용 스레드를 할당해서 데이터를 전송하는 것보다 데이터 전송 속도가 느려질 것입니다. 결과적으로 클라이언트는 잦은 화면/음성의 끊김을 겪게 될 것입니다.
+  - Async I/O는 connection 수를 늘리고 컨텍스트 스위칭을 최소화하는 장점이 있습니다. 하지만 대용량 데이터를 지속적으로 송신해야 하는 상황에서는 이벤트 루프에서 반복적으로 송신 가능 상태를 감시하고 송신 큐를 관리하는 오버헤드가 발생할 수 있습니다.
+  - 따라서 특정 환경에서는 per-client thread 모델이 latency와 throughput 측면에서 더 단순하고 효율적일 수 있습니다.
 <br><br/><br><br/>
 
 
@@ -98,4 +101,4 @@
     - 953 ~ 1005p : Network Programming,
     - 1007 ~ 1076p : Concurrent Programming)
 <br><br/>
-- [C++ RTSP Streaming Server 테스트 결과](https://github.com/DongvinPark/RtspServerInCpp)
+- [C++ RTSP Streaming Server 성능 테스트 결과](https://github.com/DongvinPark/RtspServerInCpp)
