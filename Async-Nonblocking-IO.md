@@ -89,15 +89,14 @@ _**하나의 메인 스레드와 하나의 워커 스레드를 갖추고 요청�
 ### Sync - Blocking I/O
 - 클라이언트 마다 오랫동안 컴퓨팅 리소스를 점유해야 할 때 적합합니다. 결과적으로 클라이언트 1 명당 1 개의 스레드를 할당하게 됩니다.
 - connection 별로 state를 유지 및 관리해야 하는 스트리밍 서버의 트래픽이 이러한 양상을 보입니다. RTSP 서버가 대표적입니다.
-- 실제 테스트 결과도 존재한다.(내꺼 보여주기)
-- [만약 1만 명의 http 클라이언트에게 전부 하나씩 스레드를 할당한다면?]()
+- [만약 1만 명의 http 클라이언트에게 전부 하나씩 스레드를 할당한다면?](https://github.com/DongvinPark/Debug-Archive/blob/main/Async-Nonblocking-IO.md#%EC%99%9C-%EC%9A%A9%EB%8F%84%EA%B0%80-%EB%8B%A4%EB%A5%BC%EA%B9%8C%EC%9A%94)
   - 과도한 스레드 컨텍스트 스위칭과 I/O 관련 인터럽트들의 발생으로 인해 서버의 기능이 마비될 것입니다.
 <br><br/>
 
 ### Async - Nonblocking I/O
 - 클라이언트 1 명의 컴퓨팅 리소스 점유 시간이 짧고 랜덤할 때 적합합니다. 결과적으로 연결돼 있는 connection(즉, 소켓)은 많지만, 실제로 컴퓨팅 리소스를 장기간 점유하는 connection은 적은 경우에 적합합니다.
 - 웹 서버, HTTP 서버의 트래픽이 대표적으로 이러한 양상을 보입니다.
-- [만약 1만 명의 고화질 스트리밍 시청자들에게 Async - Nonblocking I/O로 스트리밍 서비스를 제공한다면?]()
+- [만약 1만 명의 고화질 스트리밍 시청자들에게 Async - Nonblocking I/O로 스트리밍 서비스를 제공한다면?](https://github.com/DongvinPark/Debug-Archive/blob/main/Async-Nonblocking-IO.md#%EC%99%9C-%EC%9A%A9%EB%8F%84%EA%B0%80-%EB%8B%A4%EB%A5%BC%EA%B9%8C%EC%9A%94)
   - Async I/O는 connection 수를 늘리고 컨텍스트 스위칭을 최소화하는 장점이 있습니다. 하지만 대용량 데이터를 지속적으로 송신해야 하는 상황에서는 이벤트 루프에서 반복적으로 송신 가능 상태를 감시하고 송신 큐를 관리하는 오버헤드가 발생할 수 있습니다.
   - 따라서 특정 환경에서는 per-client thread 모델이 latency와 throughput 측면에서 더 단순하고 효율적일 수 있습니다.
 <br><br/><br><br/>
