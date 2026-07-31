@@ -1,4 +1,4 @@
-# EVERCHAT2.0 프로젝트 아키텍처
+# EVERCHAT2.0 프로젝트 개요
 
 ## EVERCHAT 2.0 아키텍처
 <img width="810" height="497" alt="Image" src="https://github.com/user-attachments/assets/0e947529-0be5-498a-8e39-76e8094f2df5" />
