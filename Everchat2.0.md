@@ -4,9 +4,11 @@
 <img width="810" height="497" alt="Image" src="https://github.com/user-attachments/assets/0e947529-0be5-498a-8e39-76e8094f2df5" />
 
 ## 2.0 버전 주요 구현 사항
-- 클라우드 인프라 변경
+- 클라우드 인프라 변경(MSP사 & 1.0 버전 개발사)
     - 1.0 : NCP(Naver Cloud Plaform)
     - 2.0 : AWS
+- CI/CD 파이프라인 구축
+    - AWS CodePipeline, ECR, ECS Blue Green, Fargate, Secrets Manager 활용
 - 1.0의 DB와 스키마를 2.0에서 그대로 활용
     - 2.0에서는 Toss Payments 빌링 결제 기능 & 분산 스케줄러를 위한 별도 테이블들 추가.
 - 결제 수단의 변경
