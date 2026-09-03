@@ -4,7 +4,7 @@
 
 이번 프로젝트는 기존 팬덤 채팅 서비스를 새로운 기술 스택과 인프라로 전환하는 프로젝트였다.
 
-기존 서비스의 여러 문제를 개선하기 위해 DB는 그대로 유지하면서 **NCP → AWS, Django/Python → Java/Spring, Flutter → Native App**으로 전환했고, 기존 인앱결제 외에 **Toss Payments를 이용한 신규 멤버십 결제**까지 추가했다.
+기존 서비스의 여러 문제를 개선하기 위해 DB는 그대로 유지하면서 **NCP → AWS, Django/Python → Java/Spring, Flutter → Native App**으로 전환했고, 기존 인앱결제 외에 **Toss Payments Billing API를 이용한 신규 구독 멤버십 결제**까지 추가했다.
 
 프로젝트에는 고객사, 우리 회사, 기존 개발사, MSP 등 여러 조직이 참여했다.
 
