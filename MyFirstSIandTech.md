@@ -51,7 +51,7 @@
 
 다음은 레거시 서버에서 실제로 일어난(그래서 내가 전부 발견/조치/인수인계 한) 일들이다.
 
-- FCM 알림 전송을 전부 Sync/Blocking 으로 전송한다??
+- FCM 알림들을 전부 Sync/Blocking 으로 전송한다??
     - 새 서버에서는 JDK virtual thread와 @Async 를 적극 활용한다.
 
 - DB 내 CASCADE 옵션을 켜 놓은 상태로 FK 상 최상위 테이블 내의 로우를 물리적으로 삭제한다??
