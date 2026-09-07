@@ -1,4 +1,4 @@
-# EVERCHAT2.0 프로젝트 개요
+# EVERCHAT 2.0 프로젝트 개요
 
 ## EVERCHAT 2.0 아키텍처
 <img width="810" height="497" alt="Image" src="https://github.com/user-attachments/assets/0e947529-0be5-498a-8e39-76e8094f2df5" />
@@ -13,14 +13,20 @@
     - 2.0에서는 Toss Payments 빌링 결제 기능 & 분산 스케줄러를 위한 별도 테이블들 추가.
 - 결제 수단의 변경
     - 1.0 : 인앱 결제만 가능
-    - 2.0 : 새 구독 멤버십 구매는 Toss Payments로만 결제 가능. / 기존 유저의 인앱 결제 구독 멤버십 유지를 위한 RTDN & ASSN 핸들링 구현.
+    - 2.0 : 새 구독 멤버십 구매는 Toss Payments로만 결제 가능. / 기존 유저의 인앱 결제 구독 멤버십 유지를 위한 RTDN & ASSN 수신 핸들링 구현.
+- Toss Payments Billing API를 이용한 구독 & 결제 시스템 구현
+    - State Machine(ACTIVE, HOLD, EXPIRED, DROP_OUT) 정의
+    - 분산 결제 스케줄러(Billing & Expiration) 구현(shedlock 활용)
+    - 중복 결제 방지를 위한 Redsiion Distributed Lock 적용
 
 ## EVERCHAT 1.0 문제점 & 개선 방법
-- API 서버(Python/Django)가 채팅을 위한 웹소켓 연결도 관리합니다.
-    - 2.0 에서는 API 서버와 CHAT 서버를 별개의 인스턴스로 분리하여 역할과 트래픽을 분담시켰습니다.
+- API 서버(Python/Django)가 채팅을 위한 웹소켓 연결도 관리
+    - 2.0 에서는 API 서버와 CHAT 서버를 별개의 인스턴스로 분리하여 역할과 트래픽을 분리시켰습니다.
     - CHAT 서버를 소켓 관련 커널 튜닝을 마친 EC2 인스턴스에서 돌림으로써, 대규모 웹소켓 동시 접속 상황에 대비하였습니다.
-- 네트워킹 작업을 동기식으로 처리합니다.
+    - API 서버 컨테이너가 배포/교체 돼도 웹소켓 연결이 끊어지지 않습니다.
+    - API 기능과 웹소켓 기능이 서로의 성능을 깎아먹는 일이 없습니다.
+- 네트워킹 작업을 동기식으로 처리
     - 2.0 에서는 FCM 알림 전송, Heaby DB Write의 처리가 API 응답을 Block 하지 않도록 @Asunc, CompletableFuture를 적극 사용합니다.
 - 채팅 메시지 리스트를 항상 DB에서 읽어옵니다.
     - 2.0 에서는 레디스에 최신 메시지들을 채팅룸마다 최대 200 개까지 캐시해 둠으로써 DB의 부하를 감소시켰습니다.
-    - 메시지 수정/삭제가 발생할 시 레디스 내의 메시지 캐시를 삭제함으로써 캐시 & DB 간의 일관성 유지 로직을 단순화했습니다. 유저 수가 5000 여 명으로 작은 편이어서 이러한 방법을 선택했습니다.
+    - 메시지 수정/삭제가 발생할 시 레디스 내의 메시지 캐시를 삭제함으로써 캐시 & DB 간의 일관성 유지 로직을 단순화했습니다.
