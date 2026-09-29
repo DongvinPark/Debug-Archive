@@ -16,6 +16,7 @@
 - Toss Payments Billing API
 - Distributed Lock : using Shedlock Scheduler and Redisson Lock
 - AWS Secrets Manager
+- AWS Route 53 / AWS Certificate Manager
 
 등을 처음 다뤄보면서 기술적 경험을 넓힐 수 있었다. 프로젝트 완료 후 팬덤 채팅앱의 총 유저 수는 약 5.5K 정도였고, 개발 중에도 매주 100 ~ 200 명씩 회원 수가 증가하고 있었다.
 
